@@ -1,4 +1,22 @@
 const {MongoClient, ObjectId} = require('mongodb');
 
-const url = `mongodb+srv://abecc:tortilla@cluster0.mpjye.mongodb.net/myData?retryWrites=true&w=majority`
+const url = `mongodb+srv://abecc:tortilla@cluster0.mpjye.mongodb.net/myData?retryWrites=true&w=majority`;
 
+const client =  new MongoClient(url);
+
+const dbName = 'myData';
+
+const db = client.db(dbName);
+
+const userCollection = db.collection("users")
+const dataCollection = db.collection("data")
+
+exports.getUser = async (req, res) => {
+    await client.connect()
+    const userResult = await collection.findOne(ObjectId(req.params.id))
+    client.close()
+    res.render('home',{
+        title: "Homepage",
+        user: userResult
+    })
+}
