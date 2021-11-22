@@ -20,3 +20,23 @@ exports.getUser = async (req, res) => {
         user: userResult
     })
 }
+
+exports.getAllData = async (req, res) =>{
+    await client.connect()
+    const dataResult = await collection.find({})
+    client.close()
+    res.render("dashboard",{
+        title: "Dashboard",
+        data: dataResult
+    })
+}
+
+exports.getLimitData = async (req, res) => {
+    await client.connect()
+    const dataResult = await collection.find({}).limit(req.body.limit).toArray()
+    client.close()
+    res.render("dashboard",{
+        title:"Dashboard",
+        data: dataResult
+    })
+}
