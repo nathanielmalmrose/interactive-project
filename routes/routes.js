@@ -1,4 +1,5 @@
 const {MongoClient, ObjectId} = require('mongodb');
+const bcrypt = require('bcryptjs');
 
 const url = `mongodb+srv://abecc:tortilla@cluster0.mpjye.mongodb.net/myData?retryWrites=true&w=majority`;
 
@@ -52,11 +53,20 @@ exports.getLimitData = async (req, res) => {
 }
 
 exports.addUser = async (req, res) =>{
+    let salt = bcrypt.genSaltSync(10);
+    let hash = bcrypt.hashSync(req.body.password, salt);
+    let questions = [
+        {question: req.body.q1, answer: req.body.a1},
+        {question: req.body.q2, answer: req.body.a2},
+        {question: req.body.q3, answer: req.body.a3}
+    ]
     await client.connect();
     const addUser = client.insertOne({
         username: req.body.username,
-        pass: req.body.pass,
-        saltHash: req.body.hash
+        passsword: req.body.password,
+        questions: questions,
+        saltHash: hash
+
     });
 }
 
