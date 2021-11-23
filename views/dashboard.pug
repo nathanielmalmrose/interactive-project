@@ -3,3 +3,21 @@ extends layout
 content block
     div(id="content")
         h2=`Hello, ${user.username}`
+        form(action="/changeQuestions", method="post")
+            label(for="question1") What is you favourite food? 
+            select(name="question1")
+                option(value="pizza") Pizza
+                option(value="hotdog") Hotdogs
+                option(value="hamurger") Hamburgers
+                option(value="other") Other
+            label(for="question2") Which mascot do you prefer? 
+            select(name="question1")
+                option(value="smokey") Smokey Bear
+                option(value="woodsy") Woodsy Owl
+                option(value="mcgruff") McGruff the Crime Dog
+            label(for="question3") How many languages do you know?
+            select(name="question1")
+                option(value="1") 1
+                option(value="2") 2
+                option(value="3") 3
+                option(value="4") 4+
