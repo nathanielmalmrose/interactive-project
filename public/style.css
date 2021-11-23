@@ -29,3 +29,9 @@ li a:hover:not(.active) {
 .active {
     background-color: #04AA6D;
 }
+
+form {
+    padding-top: 20px;
+    text-align: center;
+    display: inline-block;
+}
