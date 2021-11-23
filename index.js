@@ -15,6 +15,11 @@ const urlEncodedParser = express.urlencoded({
     extended: false
 });
 
-
+app.get("/", routes.home);
+app.get("/signup", routes.signUp);
+app.post("/signup", routes.addUser);
+app.get("/login", routes.logIn);
+app.post("/login", urlEncodedParser, routes.logInAction);
+app.get("/testAll", routes.getAllData);
 
 app.listen(3000);
