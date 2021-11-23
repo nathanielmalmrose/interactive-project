@@ -15,7 +15,7 @@ const config = require('../config');
 const fs = require('fs');
 
 exports.home = (req, res) => {
-    response.render('home' ,{
+    res.render('home' ,{
         config: config,
         title: "Home Page"
     });
