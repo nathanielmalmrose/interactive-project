@@ -84,8 +84,23 @@ exports.logInAction = async (req, res) => {
             user: userResults
         })
     }else{
-        res.redirect("/login")
+        res.redirect("login")
     }
+}
+
+exports.signUpAction = async (req, res) => {
+    await client.connect();
+    const addUser = client.insertOne({
+        username: req.body.username,
+        pass: req.body.pass,
+        saltHash: req.body.hash
+    });
+    const userResults = userCollection.find({username: req.body.username});
+    client.close();
+    res.render("dashboard",{
+        title: "Dashboard",
+        user: userResults
+    });
 }
 
 

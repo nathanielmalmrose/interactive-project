@@ -30,8 +30,12 @@ li a:hover:not(.active) {
     background-color: #04AA6D;
 }
 
-form {
+#content {
     padding-top: 20px;
+}
+
+#formContent{
+    width: 100%;
+    height: 100%;
     text-align: center;
-    display: inline-block;
 }

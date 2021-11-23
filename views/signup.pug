@@ -9,7 +9,7 @@ block content
             else
                 li
                     a(href=item[1])=item[0]
-    div(style="width=100%; background-color:red;")
+    div(id="formContent")
         form(action="/signup", method="post")
             input(type="text", name="username", placeholder="Username")
             br
