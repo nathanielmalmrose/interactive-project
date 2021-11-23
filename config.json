@@ -1,7 +1,7 @@
 {
     "menu": [
         ["Home","/", false],
-        ["Sign In", "/signup", true],
+        ["Sign Up", "/signup", true],
         ["Log In", "/login", true]
     ],
     "userMenu": [
