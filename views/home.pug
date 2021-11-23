@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    ul(id="navbar")
+        each item in config.menu
+            if item[2] === true
+                li(class="floater")     
+                        a(href=item[1])=item[0]
+            else
+                li
+                    a(href=item[1])=item[0]
