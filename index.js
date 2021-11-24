@@ -32,7 +32,7 @@ const checkOff = (req, res, next) =>{
 
 app.get("/", routes.home);
 app.get("/signup", routes.signUp);
-app.post("/signup", routes.addUser);
+app.post("/signup", urlEncodedParser, routes.addUser);
 app.get("/login", routes.logIn);
 app.post("/login", urlEncodedParser, routes.logInAction);
 app.get("/testAll", routes.getAllData);

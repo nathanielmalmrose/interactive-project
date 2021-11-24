@@ -53,21 +53,26 @@ exports.getLimitData = async (req, res) => {
 }
 
 exports.addUser = async (req, res) =>{
+
+    console.log(req.body.password)
+    
     let salt = bcrypt.genSaltSync(10);
-    let hash = bcrypt.hashSync(req.body.password, salt);
+    let hash = bcrypt.hash(req.body.password, salt);
     let questions = [
         {question: req.body.q1, answer: req.body.a1},
         {question: req.body.q2, answer: req.body.a2},
         {question: req.body.q3, answer: req.body.a3}
     ]
     await client.connect();
-    const addUser = client.insertOne({
+    const addUser = userCollection.insertOne({
         username: req.body.username,
-        passsword: req.body.password,
+        password: req.body.password,
         questions: questions,
         saltHash: hash
 
     });
+
+    res.redirect("/")
 }
 
 exports.signUp = (request, response) => {
@@ -86,9 +91,14 @@ exports.logIn = (request, response) => {
 
 exports.logInAction = async (req, res) => {
     await client.connect();
-    const userResults = userCollection.find({username: req.body.username})
+    const userResults = await userCollection.find({username: req.body.username}).toArray()
     client.close();
-    if(userResults.pass == req.body.pass){
+
+    console.log(userResults)
+    console.log(userResults[0].password)
+    console.log(req.body.password)
+
+    if(userResults[0].password == req.body.password){
         res.render("dashboard",{
             title: "Dashboard",
             user: userResults
@@ -102,7 +112,7 @@ exports.signUpAction = async (req, res) => {
     await client.connect();
     const addUser = client.insertOne({
         username: req.body.username,
-        pass: req.body.pass,
+        password: req.body.password,
         saltHash: req.body.hash
     });
     const userResults = userCollection.find({username: req.body.username});

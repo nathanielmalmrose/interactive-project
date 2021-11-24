@@ -1,8 +1,8 @@
 extends layout
 
-content block
+block content
     div(id="content")
-        h2=`Hello, ${user.username}`
+        h2=`Hello, ${user[0].username}`
         form(action="/changeQuestions", method="post")
             label(for="question1") What is you favourite food? 
             select(name="question1")
