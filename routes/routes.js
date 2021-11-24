@@ -113,4 +113,10 @@ exports.signUpAction = async (req, res) => {
     });
 }
 
+exports.dashboard = async (req, res) => {
+    await client.connect();
+    const userResult = await collection.findOne(req.body.username);
+    client.close();
+    //if(userResult.password == req.body.password == 'pass123') {
+}
 
