@@ -15,6 +15,21 @@ const urlEncodedParser = express.urlencoded({
     extended: false
 });
 
+app.use(expressSession({
+    secret: 'whatever',
+    saveUnitialized: true,
+    resave: true
+}))
+
+const checkOff = (req, res, next) =>{
+    if(req.session.user && req.session.user.isAuthenticated){
+        next();
+    } else{
+        res.redirect('/login');
+    }
+}
+
+
 app.get("/", routes.home);
 app.get("/signup", routes.signUp);
 app.post("/signup", routes.addUser);
