@@ -57,7 +57,10 @@ exports.addUser = async (req, res) =>{
     console.log(req.body.password)
     
     let salt = bcrypt.genSaltSync(10);
-    let hash = bcrypt.hash(req.body.password, salt);
+    let hash = bcrypt.hashSync(req.body.password, salt);
+
+    console.log(hash)
+
     let questions = [
         {question: req.body.q1, answer: req.body.a1},
         {question: req.body.q2, answer: req.body.a2},
@@ -98,7 +101,7 @@ exports.logInAction = async (req, res) => {
     console.log(userResults[0].password)
     console.log(req.body.password)
 
-    if(userResults[0].password == req.body.password){
+    if(bcrypt.compareSync(req.body.password, userResults[0].saltHash)){
         res.render("dashboard",{
             title: "Dashboard",
             user: userResults
