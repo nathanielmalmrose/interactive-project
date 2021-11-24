@@ -36,6 +36,6 @@ app.post("/signup", routes.addUser);
 app.get("/login", routes.logIn);
 app.post("/login", urlEncodedParser, routes.logInAction);
 app.get("/testAll", routes.getAllData);
-app.get("/dashboard", checkAuthorization, routes.dashboard);
+app.get("/dashboard", checkOff, routes.dashboard);
 
 app.listen(3000);
