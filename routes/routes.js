@@ -96,16 +96,18 @@ exports.logInAction = async (req, res) => {
     await client.connect();
     const userResults = await userCollection.find({username: req.body.username}).toArray()
     client.close();
-
-    console.log(userResults)
-    console.log(userResults[0].password)
-    console.log(req.body.password)
-
-    if(bcrypt.compareSync(req.body.password, userResults[0].saltHash)){
-        res.render("dashboard",{
-            title: "Dashboard",
-            user: userResults
-        })
+    if(userResults.length != 0){
+        console.log(userResults)
+        console.log(userResults[0].password)
+        console.log(req.body.password)
+        if(bcrypt.compareSync(req.body.password, userResults[0].saltHash)){
+            res.render("dashboard",{
+                title: "Dashboard",
+                user: userResults
+            })
+        }else{
+            res.redirect("login")
+        }
     }else{
         res.redirect("login")
     }
