@@ -70,9 +70,9 @@ exports.addUser = async (req, res) =>{
     console.log(hash)
 
     let questions = [
-        {question: req.body.q1, answer: req.body.a1},
-        {question: req.body.q2, answer: req.body.a2},
-        {question: req.body.q3, answer: req.body.a3}
+        {question: 'What is you favourite food?', answer: req.body.q1},
+        {question: 'Which mascot do you prefer?', answer: req.body.q2},
+        {question: 'How many languages do you know?', answer: req.body.q3}
     ]
     await client.connect();
     const addUser = userCollection.insertOne({
@@ -157,24 +157,41 @@ exports.signUpAction = async (req, res) => {
 
 exports.dashboard = async (req, res) => {
     await client.connect();
-    const userResult = await collection.findOne(req.body.username);
+    const userResult = await collection.findOne(req.body._id);
     client.close();
     //if(userResult.password == req.body.password == 'pass123') {
 }
 
 exports.changeAnswer = async (req, res) => {
     await client.connect();
+    console.log("changeAnswer reached")
+    console.log(req)
+    
+    console.log(req.body.question1)
+
     let questions = [
-        {question: req.body.q1, answer: req.body.a1},
-        {question: req.body.q2, answer: req.body.a2},
-        {question: req.body.q3, answer: req.body.a3}
+        {answer1: req.body.question1[0],
+        answer2: req.body.question1[1],
+        answer3: req.body.question1[2]}
     ]
-    const updateResult = await collection.updateOne(
-        {username: user.username},
+    const updateResult = await userCollection.updateOne(
+        {_id: ObjectId(req.params.id)},
         { $set: {
             questions: questions
         }
     });
     client.close();
+    res.redirect("/")
 }
 
+exports.api = async (req,res) => {
+    await client.connect();
+    collection.find(
+        {
+            questions:
+            {
+                
+            }
+        })
+
+}
