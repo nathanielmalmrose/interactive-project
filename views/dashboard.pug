@@ -1,6 +1,9 @@
 extends layout
 
 block content
+    ul(id="navbar")
+        li(class="floater")     
+            a(href="/logout") Log Out
     div(id="content")
         h2=`Hello, ${user[0].username}`
         form(action="/dashboard", method="post")
