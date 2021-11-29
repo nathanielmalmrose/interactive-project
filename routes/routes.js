@@ -15,6 +15,14 @@ const dataCollection = db.collection("data")
 const config = require('../config');
 const fs = require('fs');
 
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+let d = new Date();
+let month = months[d.getMonth()];
+let day = d.getDate();
+let year = d.getFullYear();
+let visited = 0;
+let myString = `${month} ${day}, ${year}`;
+
 exports.home = (req, res) => {
     res.render('home' ,{
         config: config,
@@ -101,11 +109,31 @@ exports.logInAction = async (req, res) => {
     console.log(userResults[0].password)
     console.log(req.body.password)
 
+
+
     if(bcrypt.compareSync(req.body.password, userResults[0].saltHash)){
-        res.render("dashboard",{
-            title: "Dashboard",
-            user: userResults
-        })
+        if(req.cookies.beenHereBefore == 'yes') {
+            visited++;
+            res.cookie('visited', visited, {maxAge: 9999999999});
+            let myString = `${month} ${day}, ${year}`;
+            res.cookie('stuff', myString, {maxAge: 9999999999});
+            res.render("dashboard",{
+                title: "Dashboard",
+                user: userResults,
+                data: `Welcome back. Last time you were on this site: ${req.cookies.stuff}. `
+            });
+        }
+        else {
+            res.cookie('beenHereBefore', 'yes', {maxAge: 9999999999});
+            visited = 1;
+            res.cookie('visited', visited, {maxAge: 9999999999});
+            res.cookie('stuff', myString, {maxAge: 9999999999});
+            res.render("dashboard",{
+                title: "Dashboard",
+                user: userResults,
+                data: "Welcome new user!"
+            });
+        }  
     }else{
         res.redirect("login")
     }
@@ -122,7 +150,8 @@ exports.signUpAction = async (req, res) => {
     client.close();
     res.render("dashboard",{
         title: "Dashboard",
-        user: userResults
+        user: userResults,
+        data: "Welcome new user!"
     });
 }
 

@@ -3,7 +3,8 @@ const express = require('express'),
     path = require('path'),
     routes = require('./routes/routes'),
     expressSession = require('express-session'),
-    bcrypt = require('bcryptjs');
+    bcrypt = require('bcryptjs'),
+    cookieParser = require('cookie-parser');
 
     const app = express();
 
@@ -29,6 +30,7 @@ const checkOff = (req, res, next) =>{
     }
 }
 
+app.use(cookieParser('whatever'));
 
 app.get("/", routes.home);
 app.get("/signup", routes.signUp);
