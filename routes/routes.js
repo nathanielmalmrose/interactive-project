@@ -120,3 +120,19 @@ exports.dashboard = async (req, res) => {
     //if(userResult.password == req.body.password == 'pass123') {
 }
 
+exports.changeAnswer = async (req, res) => {
+    await client.connect();
+    let questions = [
+        {question: req.body.q1, answer: req.body.a1},
+        {question: req.body.q2, answer: req.body.a2},
+        {question: req.body.q3, answer: req.body.a3}
+    ]
+    const updateResult = await collection.updateOne(
+        {username: user.username},
+        { $set: {
+            questions: questions,
+        }
+    });
+    client.close();
+}
+

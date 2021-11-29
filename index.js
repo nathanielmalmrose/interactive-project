@@ -37,5 +37,6 @@ app.get("/login", routes.logIn);
 app.post("/login", urlEncodedParser, routes.logInAction);
 app.get("/testAll", routes.getAllData);
 app.get("/dashboard", checkOff, routes.dashboard);
+app.post("/dashboard", checkOff, routes.changeAnswer);
 
 app.listen(3000);
