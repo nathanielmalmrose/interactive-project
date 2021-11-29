@@ -1,9 +1,12 @@
 extends layout
 
 block content
+    ul(id="navbar")
+        li(class="floater")     
+            a(href="/logout") Log Out
     div(id="content")
         h2=`Hello, ${user[0].username}`
-        form(action="/changeQuestions", method="post")
+        form(action="/dashboard", method="post")
             label(for="question1") What is you favourite food? 
             select(name="question1")
                 option(value="pizza") Pizza
@@ -23,3 +26,5 @@ block content
                 option(value="2") 2
                 option(value="3") 3
                 option(value="4") 4+
+            br
+            input(type="submit", value="Update Answers")
