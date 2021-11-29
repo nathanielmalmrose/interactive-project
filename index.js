@@ -29,7 +29,7 @@ const checkOff = (req, res, next) =>{
     }
 }
 
-
+app.get("/api", routes.api);
 app.get("/", routes.home);
 app.get("/signup", routes.signUp);
 app.post("/signup", urlEncodedParser, routes.addUser);
