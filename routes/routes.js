@@ -130,7 +130,7 @@ exports.changeAnswer = async (req, res) => {
     const updateResult = await collection.updateOne(
         {username: user.username},
         { $set: {
-            questions: questions,
+            questions: questions
         }
     });
     client.close();
