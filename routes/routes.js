@@ -62,9 +62,9 @@ exports.addUser = async (req, res) =>{
     console.log(hash)
 
     let questions = [
-        {question: req.body.q1, answer: req.body.a1},
-        {question: req.body.q2, answer: req.body.a2},
-        {question: req.body.q3, answer: req.body.a3}
+        {question: 'What is you favourite food?', answer: req.body.q1},
+        {question: 'Which mascot do you prefer?', answer: req.body.q2},
+        {question: 'How many languages do you know?', answer: req.body.q3}
     ]
     await client.connect();
     const addUser = userCollection.insertOne({
@@ -113,20 +113,7 @@ exports.logInAction = async (req, res) => {
     }
 }
 
-exports.signUpAction = async (req, res) => {
-    await client.connect();
-    const addUser = client.insertOne({
-        username: req.body.username,
-        password: req.body.password,
-        saltHash: req.body.hash
-    });
-    const userResults = userCollection.find({username: req.body.username});
-    client.close();
-    res.render("dashboard",{
-        title: "Dashboard",
-        user: userResults
-    });
-}
+
 
 exports.dashboard = async (req, res) => {
     await client.connect();
@@ -157,3 +144,14 @@ exports.changeAnswer = async (req, res) => {
     res.redirect("/")
 }
 
+exports.api = async (req,res) => {
+    await client.connect();
+    collection.find(
+        {
+            questions:
+            {
+                
+            }
+        })
+
+}
