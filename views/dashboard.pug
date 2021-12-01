@@ -7,7 +7,7 @@ block content
     div(id="content")
         h2=`Hello, ${user[0].username}`
         h3 #{data}
-        form(action="/dashboard", method="post")
+        form(action="/dashboard/" + user[0]._id, method="post")
             label(for="question1") What is you favourite food? 
             select(name="question1")
                 option(value="pizza") Pizza
