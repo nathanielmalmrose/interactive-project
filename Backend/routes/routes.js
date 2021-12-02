@@ -195,8 +195,7 @@ exports.api = async (req,res) => {
     client.close();
 
     for (let index = 0; index < totalUsers; index++) {
-        console.log(userResults[index].questions[0].answer);
-        switch (userResults[index].questions[0]) {
+        switch (userResults[index].questions[0].answer) {
             case 'pizza':
                 question1Answers[0] += 1;
                 break;
@@ -206,10 +205,11 @@ exports.api = async (req,res) => {
             case 'hamurger':
                 question1Answers[2] += 1;
                 break;
-            default:
+            case 'other':
                 question1Answers[3] += 1;
         }
 
+        console.log(userResults[index].questions[0].answer);
         switch (userResults[index].questions[1]) {
             case 'smokey':
                 question2Answers[0] += 1;
@@ -222,6 +222,7 @@ exports.api = async (req,res) => {
                 break;
         }
 
+        console.log(userResults[index].questions[0].answer);
         switch (userResults[index].questions[2]) {
             case '1':
                 question1Answers[0] += 1;
@@ -235,6 +236,8 @@ exports.api = async (req,res) => {
             case '4':
                 question1Answers[3] += 1;
                 break;
+            default:
+                question1Answers[0] += 1;
         }
     }
 
