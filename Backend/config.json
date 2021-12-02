@@ -1,12 +1,7 @@
 {
     "menu": [
         ["Home","/", false],
-        ["Sign Up", "/signup", true],
+        ["Sign In", "/signup", true],
         ["Log In", "/login", true]
-    ],
-    "userMenu": [
-        ["Log Out", "/"],
-        ["Self-Automated Upgrades","When we can't the job done with updates, Buddy-Bot is here to help. With it's connection to the information highway, this little robot will change itself to make it a functional member of your household. Whether it be a whisk or blowtorch attachment, Buddy-Bot will help all the way."],
-        ["Connectivity With The Home","Like all Digital Imaginations products, they are all built in with a chip to connect them with any smart appliances to help communicate better, giving them a chance to rise up to the occassion when it's time to do so. Buddy-Bot can tell your oven to preheat when dinner is being prepared while they are taking care of the children in the other room."]
     ]
 }
