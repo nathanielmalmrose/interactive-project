@@ -120,6 +120,7 @@ exports.logInAction = async (req, res) => {
             res.render("dashboard",{
                 title: "Dashboard",
                 user: userResults,
+                
                 data: `Welcome back. Last time you were on this site: ${req.cookies.stuff}. `
             });
         }
@@ -170,9 +171,9 @@ exports.changeAnswer = async (req, res) => {
     console.log(req.body.question1)
 
     let questions = [
-        {answer1: req.body.question1[0],
-        answer2: req.body.question1[1],
-        answer3: req.body.question1[2]}
+        {question: 'What is you favourite food?', answer: req.body.q1},
+        {question: 'Which mascot do you prefer?', answer: req.body.q2},
+        {question: 'How many languages do you know?', answer: req.body.q3}
     ]
     const updateResult = await userCollection.updateOne(
         {_id: ObjectId(req.params.id)},
@@ -181,7 +182,7 @@ exports.changeAnswer = async (req, res) => {
         }
     });
     client.close();
-    res.redirect("/")
+    res.redirect("/");
 }
 
 exports.api = async (req,res) => {
