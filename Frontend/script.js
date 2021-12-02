@@ -74,7 +74,7 @@ const loop = () => {
     else {
 		player.x = player.x + directionX;
     }
-	ctx.drawImage(image, player.x, player.y, 32, 32);
+	ctx.fillRect(image, player.x, player.y, 32, 32);
     drawForeGround();
 }
 

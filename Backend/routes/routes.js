@@ -186,11 +186,56 @@ exports.changeAnswer = async (req, res) => {
 
 exports.api = async (req,res) => {
     await client.connect();
-    collection.find({
-            questions:
-            {
-                
-            }
-    })
+    const totalUsers = await userCollection.find().count();
+    const userResults = await userCollection.find({}).toArray();
+    let question1Answers = [0, 0, 0, 0];
+    let question2Answers = [0, 0 ,0];
+    let question3Answers = [0, 0, 0, 0];
+    client.close();
 
+    for (let index = 0; index < totalUsers; index++) {
+        console.log(userResults[index].questions[0].answer);
+        switch (userResults[index].questions[0]) {
+            case 'pizza':
+                question1Answers[0] += 1;
+                break;
+            case 'hotdog':
+                question1Answers[1] += 1;
+                break;
+            case 'hamurger':
+                question1Answers[2] += 1;
+                break;
+            default:
+                question1Answers[3] += 1;
+        }
+
+        switch (userResults[index].questions[1]) {
+            case 'smokey':
+                question2Answers[0] += 1;
+                break;
+            case 'woodsy':
+                question2Answers[1] += 1;
+                break;
+            case 'mcgruff':
+                question2Answers[2] += 1;
+                break;
+        }
+
+        switch (userResults[index].questions[2]) {
+            case '1':
+                question1Answers[0] += 1;
+                break;
+            case '2':
+                question1Answers[1] +=+ 1;
+                break;
+            case '3':
+                question1Answers[2] += 1;
+                break;
+            case '4':
+                question1Answers[3] += 1;
+                break;
+        }
+    }
+
+    console.log(question1Answers, question2Answers, question3Answers);
 }
