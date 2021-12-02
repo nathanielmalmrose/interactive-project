@@ -1,4 +1,4 @@
-const canvasDemo = document.getElementById("demo");
+const canvasDemo = document.getElementById("canvas");
 const ctx = canvasDemo.getContext("2d");
 
 canvasDemo.width = 800;
@@ -78,4 +78,39 @@ const loop = () => {
     drawForeGround();
 }
 
-setInterval(loop, 1);
+const drawPieChart = (centerx, centery, radius, data) => {
+
+    //  360 degrees
+    let startAngle = 0;
+    let endAngle = 0;
+
+    //  Get total amount of Arc Units (number of segments to complete circle)
+    let totalArcUnits = 0;
+    for(var i = 0; i < data.length; i++) {
+        totalArcUnits += data[i][0];
+    }
+
+    //  Full Circle divided by total amount of Arc Units
+    //  Equals length of each arc needed to complete a circle
+    let arcLengthDegrees = 360 / totalArcUnits;
+
+    //  Convert to Radians
+    let arcLengthRadian = arcLengthDegrees * (Math.PI / 180);
+
+    for(var i = 0; i < data.length; i++) {
+        ctx.beginPath();
+        ctx.moveTo(centerx, centery);
+        //  Get color from chart info
+        ctx.fillStyle = data[i][1];
+        
+
+        //  Start new arc (pie slice) from end of previous arc
+        startAngle = endAngle;
+        endAngle = endAngle + (arcLengthRadian * data[i][0]);
+
+        ctx.arc(centerx, centery, radius, startAngle, endAngle);
+        ctx.closePath();
+        ctx.fill();
+    }
+}
+setInterval(drawPieChart, 1);
