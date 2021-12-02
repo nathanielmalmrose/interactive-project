@@ -194,49 +194,69 @@ exports.api = async (req,res) => {
     let question3Answers = [0, 0, 0, 0];
     client.close();
 
+    console.log(totalUsers)
+    console.log(userResults)
+
     for (let index = 0; index < totalUsers; index++) {
-        console.log(userResults[index].questions[0].answer);
-        switch (userResults[index].questions[0]) {
+
+        console.log(index)
+
+        console.log(userResults[index])
+
+        switch (userResults[index].questions[0]["answer"]) {
             case 'pizza':
+                console.log(userResults[index].questions[0]["answer"]);
                 question1Answers[0] += 1;
                 break;
             case 'hotdog':
+                console.log(userResults[index].questions[0]["answer"]);
                 question1Answers[1] += 1;
                 break;
             case 'hamurger':
+                console.log(userResults[index].questions[0]["answer"]);
                 question1Answers[2] += 1;
                 break;
             default:
+                console.log(userResults[index].questions[0]["answer"]);
                 question1Answers[3] += 1;
         }
 
-        switch (userResults[index].questions[1]) {
+        switch (userResults[index].questions[1]["answer"]) {
             case 'smokey':
+                console.log(userResults[index].questions[1]["answer"]);
                 question2Answers[0] += 1;
                 break;
             case 'woodsy':
+                console.log(userResults[index].questions[1]["answer"]);
                 question2Answers[1] += 1;
                 break;
             case 'mcgruff':
+                console.log(userResults[index].questions[1]["answer"]);
                 question2Answers[2] += 1;
                 break;
         }
 
-        switch (userResults[index].questions[2]) {
+        switch (userResults[index].questions[2]["answer"]) {
             case '1':
-                question1Answers[0] += 1;
+                console.log(userResults[index].questions[2]["answer"]);
+                question3Answers[0] += 1;
                 break;
             case '2':
-                question1Answers[1] +=+ 1;
+                console.log(userResults[index].questions[2]["answer"]);
+                question3Answers[1] +=+ 1;
                 break;
             case '3':
-                question1Answers[2] += 1;
+                console.log(userResults[index].questions[2]["answer"]);
+                question3Answers[2] += 1;
                 break;
             case '4':
-                question1Answers[3] += 1;
+                console.log(userResults[index].questions[2]["answer"]);
+                question3Answers[3] += 1;
                 break;
         }
     }
 
     console.log(question1Answers, question2Answers, question3Answers);
+
+    res.send({question1Answers, question2Answers, question3Answers})
 }
