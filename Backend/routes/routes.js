@@ -186,12 +186,11 @@ exports.changeAnswer = async (req, res) => {
 
 exports.api = async (req,res) => {
     await client.connect();
-    collection.find(
-        {
+    collection.find({
             questions:
             {
                 
             }
-        })
+    })
 
 }
