@@ -198,19 +198,22 @@ exports.api = async (req,res) => {
         switch (userResults[index].questions[0].answer) {
             case 'pizza':
                 question1Answers[0] += 1;
+                console.log("Got pizza")
                 break;
             case 'hotdog':
+                console.log("Got hotdog")
                 question1Answers[1] += 1;
                 break;
             case 'hamurger':
+                console.log("Got burger")
                 question1Answers[2] += 1;
                 break;
             case 'other':
+                console.log("Got other");
                 question1Answers[3] += 1;
         }
 
-        console.log(userResults[index].questions[0].answer);
-        switch (userResults[index].questions[1]) {
+        switch (userResults[index].questions[1].answer) {
             case 'smokey':
                 question2Answers[0] += 1;
                 break;
@@ -222,8 +225,7 @@ exports.api = async (req,res) => {
                 break;
         }
 
-        console.log(userResults[index].questions[0].answer);
-        switch (userResults[index].questions[2]) {
+        switch (userResults[index].questions[2].answer) {
             case '1':
                 question1Answers[0] += 1;
                 break;
