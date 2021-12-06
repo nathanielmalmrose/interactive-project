@@ -254,7 +254,5 @@ exports.api = async (req,res) => {
         }
     }
 
-    console.log(question1Answers, question2Answers, question3Answers);
-
-    res.send({question1Answers, question2Answers, question3Answers})
+    res.json(question1Answers, question2Answers, question3Answers)
 }
