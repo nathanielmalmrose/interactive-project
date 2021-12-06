@@ -254,5 +254,5 @@ exports.api = async (req,res) => {
         }
     }
 
-    res.json(question1Answers, question2Answers, question3Answers)
+    res.json({question1Answers, question2Answers, question3Answers})
 }
