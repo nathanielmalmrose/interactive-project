@@ -48,38 +48,42 @@ let player = {
     size: 16
 };
 
-var image = new Image();
-image.src = 'player.png';
+data = [];
 
-window.addEventListener('keydown', function (e) {
-    myGameArea.key = e.key;
-});
-  window.addEventListener('keyup', function (e) {
-    myGameArea.key = false;
-});
+
 
 const loop = () => {
     ctx.clearRect(0, 0, 800, 400);
-    drawBackGround();
-    ctx.fillStyle = '';
     
-    if (player.x > 780) {
-		player.x = 780;
-		directionX = -1;
+    let q1 = data.question1Answers;
+    let q2 = data.question2Answers;
+    let q3 = data.question3Answers;
+
+
+    for (let i = 0; i < 3; i++) {
+        switch(i) {
+            case 0:
+                drawPieChart(100, 100, 100, q1);
+                break;
+            case 1:
+                drawPieChart(250, 100, 100, q2);
+                break;
+            case 2:
+                drawPieChart(400, 100, 100, q3);
+                break;
+        }
     }
-	else if (player.x < -8) {
-		player.x = -8;
-		directionX = 1;
-	}
-    else {
-		player.x = player.x + directionX;
-    }
-	ctx.fillRect(image, player.x, player.y, 32, 32);
-    drawForeGround();
 }
 
-const drawPieChart = (centerx, centery, radius, data) => {
+let fetchData = async (url) => {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+    return data;
+};
 
+const drawPieChart = (centerx, centery, radius, data) => {
+    
     //  360 degrees
     let startAngle = 0;
     let endAngle = 0;
@@ -113,4 +117,6 @@ const drawPieChart = (centerx, centery, radius, data) => {
         ctx.fill();
     }
 }
-setInterval(drawPieChart, 1);
+data = fetchData('http://localhost:3000/api');
+console.log(data);
+setInterval(loop(), 100);
