@@ -50,37 +50,38 @@ let player = {
 
 data = [];
 
-
-
-const loop = () => {
-    ctx.clearRect(0, 0, 800, 400);
-    
-    let q1 = data.question1Answers;
-    let q2 = data.question2Answers;
-    let q3 = data.question3Answers;
-
-
-    for (let i = 0; i < 3; i++) {
-        switch(i) {
-            case 0:
-                drawPieChart(100, 100, 100, q1);
-                break;
-            case 1:
-                drawPieChart(250, 100, 100, q2);
-                break;
-            case 2:
-                drawPieChart(400, 100, 100, q3);
-                break;
-        }
-    }
-}
-
 let fetchData = async (url) => {
     const response = await fetch(url);
     const data = await response.json();
     console.log(data);
-    return data;
+    init(data);
 };
+
+const init = (data) => {
+    let q1 = data.question1Answers;
+    let q2 = data.question2Answers;
+    let q3 = data.question3Answers;
+
+    let q1Color = [[q1[0], '#f00'], [q1[1], '#0f0'], [q1[2], '#00f'], [q1[3], '#0ff']];
+    let q2Color = [[q2[0], '#f00'], [q2[1], '#0f0'], [q2[2], '#00f']];
+    let q3Color = [[q1[0], '#f00'], [q1[1], '#0f0'], [q1[2], '#00f'], [q1[3], '#0ff']];
+
+    console.log("q3: ", data.question3Answers);
+
+    for (let i = 0; i < 3; i++) {
+        switch(i) {
+            case 0:
+                drawPieChart(100, 100, 80, q1Color);
+                break;
+            case 1:
+                drawPieChart(300, 100, 80, q2Color);
+                break;
+            case 2:
+                drawPieChart(500, 100, 80, q3Color);
+                break;
+        }
+    }
+}
 
 const drawPieChart = (centerx, centery, radius, data) => {
     
@@ -118,5 +119,5 @@ const drawPieChart = (centerx, centery, radius, data) => {
     }
 }
 data = fetchData('http://localhost:3000/api');
-console.log(data);
-setInterval(loop(), 100);
+// console.log(data);
+// setInterval(loop(), 100);
